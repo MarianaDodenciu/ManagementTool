@@ -2,7 +2,10 @@ package ro.mariana.services;
 
 import org.springframework.stereotype.Service;
 import ro.mariana.domain.Project;
+import ro.mariana.exceptions.ProjectIdException;
 import ro.mariana.repositories.ProjectRepository;
+
+import java.util.Locale;
 
 @Service
 public class ProjectService {
@@ -14,6 +17,11 @@ public class ProjectService {
     }
 
     public Project saveOrUpdate(Project project) {
-        return projectRepository.save(project);
+        try {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase(Locale.ROOT));
+            return projectRepository.save(project);
+        } catch (Exception e) {
+            throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase(Locale.ROOT));
+        }
     }
 }

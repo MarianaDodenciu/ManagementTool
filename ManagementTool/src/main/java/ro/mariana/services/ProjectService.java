@@ -21,7 +21,9 @@ public class ProjectService {
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase(Locale.ROOT));
             return projectRepository.save(project);
         } catch (Exception e) {
-            throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase(Locale.ROOT));
+            throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase(Locale.ROOT)); //var 1
+            //vezi care e diferenta,cum arata eroarea cu var 1 si var 2
+            //throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase(Locale.ROOT), e); //var 2
         }
     }
 }

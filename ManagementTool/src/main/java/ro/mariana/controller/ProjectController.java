@@ -3,15 +3,12 @@ package ro.mariana.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ro.mariana.domain.Project;
 import ro.mariana.services.MapValidationErrorService;
 import ro.mariana.services.ProjectService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/project")
@@ -44,5 +41,11 @@ public class ProjectController {
     @GetMapping("/all")
     public Iterable<Project> getAllProjects() {
         return projectService.findAllProjects();
+    }
+
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<?> deleteProject(@PathVariable String projectId) {
+        projectService.deleteProjectByIdentifier(projectId);
+        return new ResponseEntity<String>("Project with ID: " + projectId + "was deleted", HttpStatus.OK);
     }
 }

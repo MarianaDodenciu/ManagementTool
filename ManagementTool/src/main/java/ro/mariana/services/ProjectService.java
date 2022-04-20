@@ -30,7 +30,7 @@ public class ProjectService {
     public Project findByProjectIdentifier(String projectId) {
 
         Project project = projectRepository.findByProjectIdentifier(projectId);
-        if(project == null) {
+        if (project == null) {
             throw new ProjectIdException("Project does not exist in the database");
         }
         return project;
@@ -38,5 +38,13 @@ public class ProjectService {
 
     public Iterable<Project> findAllProjects() {
         return projectRepository.findAll();
+    }
+
+    public void deleteProjectByIdentifier(String projectId) {
+        Project project = projectRepository.findByProjectIdentifier(projectId);
+        if (project == null) {
+            throw new ProjectIdException("Can't delete project with ID " + projectId + ". The project does not exist");
+        }
+        projectRepository.delete(project);
     }
 }

@@ -19,7 +19,7 @@ public class Project {
     private String projectName;
     @NotBlank(message = "Project Identifier is required")
     @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
-    @Column(updatable = false, unique = true)
+    @Column(updatable = false, unique = true) //datorita linie acesteia da sql exception
     private String projectIdentifier;
     @NotBlank(message = "Project description is required")
     private String description;

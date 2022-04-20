@@ -26,4 +26,17 @@ public class ProjectService {
             //throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase(Locale.ROOT), e); //var 2
         }
     }
+
+    public Project findByProjectIdentifier(String projectId) {
+
+        Project project = projectRepository.findByProjectIdentifier(projectId);
+        if(project == null) {
+            throw new ProjectIdException("Project does not exist in the database");
+        }
+        return project;
+    }
+
+    public Iterable<Project> findAllProjects() {
+        return projectRepository.findAll();
+    }
 }
